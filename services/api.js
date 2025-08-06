@@ -1,4 +1,5 @@
 import axios from "axios"; 
+import { getAuthHeaders } from "../utils/auth";
 
 console.log('API URL:', process.env.NEXT_PUBLIC_API_URL); // For debugging
 
@@ -8,6 +9,17 @@ const api = axios.create({
         "Content-Type": "application/json",
     },
     withCredentials: true
+});
+
+api.interceptors.request.use(config => {
+    const authHeaders = getAuthHeaders();
+    if (Object.keys(authHeaders).length > 0) {
+        config.headers = {
+            ...config.headers,
+            ...authHeaders,
+        };
+    }
+    return config;
 });
 
 // Thêm interceptor để log requests (để debug)
