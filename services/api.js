@@ -5,7 +5,7 @@ console.log('API URL:', process.env.NEXT_PUBLIC_API_URL); // For debugging
 const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
     },
     withCredentials: true
 });
