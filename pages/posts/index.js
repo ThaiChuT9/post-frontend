@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import PostCard from '../../components/posts/PostCard';
 
+
 export default function PostsPage() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    
     useEffect(() => {
         async function fetchPosts() {
             try {

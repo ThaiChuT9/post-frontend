@@ -1,5 +1,5 @@
-import axios from "axios"; 
-import { getAuthHeaders } from "../utils/auth";
+import axios from "axios";
+import { getAuthHeaders, getToken } from "../utils/auth";
 
 // console.log('API URL:', process.env.NEXT_PUBLIC_API_URL); // For debugging
 
@@ -11,16 +11,28 @@ const api = axios.create({
     withCredentials: true
 });
 
-api.interceptors.request.use(config => {
-    const authHeaders = getAuthHeaders();
-    if (Object.keys(authHeaders).length > 0) {
-        config.headers = {
-            ...config.headers,
-            ...authHeaders,
-        };
+// Gắn token tự động vào mỗi request
+api.interceptors.request.use((config) => {
+    const token = getToken();
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 });
+
+// Redirect nếu token hết hạn
+api.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.response?.status === 401) {
+            removeToken();
+            if (typeof window !== 'undefined') {
+                window.location.href = '/login';
+            }
+        }
+        return Promise.reject(error);
+    }
+);
 
 // // Thêm interceptor để log requests (để debug)
 // api.interceptors.request.use(request => {
