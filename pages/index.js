@@ -17,6 +17,7 @@ export default function Home() {
     const fetchPosts = async () => {
         try {
             const response = await api.get('/posts');
+            // console.log("✅ Posts from API:", response.data);
             setPosts(response.data);
         } catch (err) {
             setError('Failed to fetch posts');
