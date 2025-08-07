@@ -20,12 +20,12 @@ export default function Navbar() {
     return isClient ? (
         <nav className="bg-gray-800 text-white p-4">
             <div className="container mx-auto flex justify-between items-center">
-                <Link href="/" className="text-xl font-bold">Post App</Link>
+                <Link href="/" className="text-xl font-bold">POSTY</Link>
                 <div className="space-x-4">
                     <Link href="/" className="hover:underline">Home</Link>
+                    <Link href="/posts" className="hover:underline">Posts</Link>
                     {isLoggedIn ? (
                         <>
-                            <Link href="/posts" className="hover:underline">Posts</Link>
                             <button onClick={handleLogout} className="hover:underline">Logout</button>
                         </>
                     ) : (

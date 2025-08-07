@@ -37,7 +37,7 @@ export default function Login() {
                 setToken(response.data.token);
                 setTimeout(() => {
                     router.push('/'); // Redirect to home page after successful login
-                }, 2000);
+                }, 1500);
             } else {
                 setError('Login failed. Please try again.');
             }
