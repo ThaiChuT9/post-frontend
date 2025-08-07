@@ -81,7 +81,7 @@ export default function PostDetailPage() {
             </div>
             {post.thumbnail && (
                 <img
-                    src={`http://localhost:3000${thumbnailPath}`}
+                    src={`https://post-management-api-ilps.onrender.com${thumbnailPath}`}
                     alt={post.title}
                     className="w-full object-contain rounded mb-4"
                     style={{ maxHeight: '600px' }}
